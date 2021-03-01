@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head><!--container tag-->
+        <meta charset="UTF-8"><!--Metatag is used to define information about the file-->
+        <meta name="description" content="This is an awsome website">
+    <!-- ide jonnek az adatai a weboldalnak(firebase,jquery,bootsrap,css)-->    
+    <!-- we can use head to import any resources-->
+    <!-- we can link other type of files in this section-->
+        <title>Halasz Gergo's Website</title><!-- the title is content holder-->
+    </head>
+    <body>
+      <!--this section will be rendered(bemutatva) by the browser-->
+      <!--parse === elemez--> 
+        
+        
+        <h2>Halasz Gergo's Website</h2>
+        <hr/><!--Single Tag-->
+        <p id="first">This is my <b><i>paragraph</i></b></p>
+        <button id="button"  >Time</button>
+        <p id="demo"></p>
+        <p>To do list:Write in the box what you want to do this day!</p>
+        <textarea id="textArea" ></textarea>
+        <br/>
+        <button id="buttonAdd" >Add</button>
+        <button id="buttonDelete">Delete</button>
+        
+        <script>
+            var countTodoListElements = 1;
+            var checkIfItIsOnlyWhiteSpaceInTextArea = /^\s+$/;  
+            
+            var getParagraphWithIdDemo = document.getElementById("demo");
+            getParagraphWithIdDemo.innerHTML = 'Hello JavaScript'
+            getParagraphWithIdDemo.style.color = 'red'
+            getParagraphWithIdDemo.style.background = "yellow"
+            
+            var buttonWithIdButton = 
+            document.getElementById("button").onclick = function(){
+                writingTimeInDemoParagraph();
+            };
+            
+            var writingTimeInDemoParagraph = function () {
+            console.log(document.getElementById("demo").innerHTML = Date())
+            };  
+
+            var getParagraphs = document.querySelectorAll("p");
+            var paragraphs = Array.from(getParagraphs);
+
+            document.getElementById("buttonAdd").onclick = function () {
+                var isThereOnlyWhiteSpaceCaracter = (document.getElementById("textArea").value).match(checkIfItIsOnlyWhiteSpaceInTextArea);
+                
+                if(document.getElementById("textArea").value!=="" && isThereOnlyWhiteSpaceCaracter===null)
+                {
+                var contentFromTextArea = document.createElement("p");
+                contentFromTextArea.innerHTML = countTodoListElements+"."+document.getElementById("textArea").value;
+                document.body.appendChild(contentFromTextArea);
+                countTodoListElements++;
+                paragraphs.push(contentFromTextArea);
+                }
+                else
+                {  
+                    document.getElementById("textArea").style.borderColor = 'red'
+                    alert("The sequence that you writed in the box is not a word!");
+                    
+                }
+                document.getElementById("textArea").value = null;
+               
+                
+            }
+            
+            
+            document.getElementById("buttonDelete").onclick = function () {
+                var checkIfThereIsAnElementFromTodoList = paragraphs.length>3;
+                if(checkIfThereIsAnElementFromTodoList) 
+                {
+                    var deleteElementFromHtml = paragraphs.length-1;
+                    paragraphs[deleteElementFromHtml].remove();
+                    paragraphs.pop();                  
+                    countTodoListElements--;
+                }
+            }
+          
+           
+        </script>
+        
+       
+                    
+    </body>
+
+</html>
+
+
